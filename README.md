@@ -6,6 +6,10 @@ It is an incident-response cockpit built on top of Copilot CLI that correlates t
 
 Instead of starting from a vague prompt during an outage, Copilot SRE assembles the evidence first and then hands Copilot a structured operational brief.
 
+## Proof demo
+
+![Copilot SRE proof demo](docs/screenshots/copilot-sre-demo.gif)
+
 ## Dashboard screenshots
 
 ### UI overview
@@ -229,6 +233,12 @@ To recapture the README screenshots from the live UI demo:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\scripts\capture_ui_screenshots.ps1
+```
+
+To regenerate the animated proof demo:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\record_demo_gif.ps1
 ```
 
 ## License
