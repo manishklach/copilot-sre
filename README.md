@@ -274,7 +274,24 @@ Copilot SRE shows one possible direction where GitHub tooling could evolve from 
 - generate stronger rollback and post-incident follow-up outputs
 - run baseline vs Copilot SRE evaluations on realistic incidents
 
-### v0.2.0
+## Next release: v0.2.0
+
+The next release should focus on turning Copilot SRE from a polished showcase into something teams could plausibly run during a real incident.
+
+The central theme for `v0.2.0` is:
+
+- MCP-backed live evidence gathering
+- incident-pack auto-generation from live sources
+- lower-friction setup for real operational use
+
+Key goals:
+
+- connect at least one live MCP source quickly
+- assemble a live incident brief without hand-editing `incident.json`
+- preserve explainability while increasing automation
+- strengthen the GitHub + Azure story with live context, not just demo context
+
+### Planned v0.2.0 scope
 
 - add MCP-backed live evidence gathering
 - auto-generate incident packs from live sources
