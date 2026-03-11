@@ -6,6 +6,10 @@ It is an incident-response cockpit built on top of Copilot CLI that correlates t
 
 Instead of starting from a vague prompt during an outage, Copilot SRE assembles the evidence first and then hands Copilot a structured operational brief.
 
+## Architecture overview
+
+![Copilot SRE architecture overview](docs/screenshots/architecture-overview.svg)
+
 ## Proof demo
 
 ![Copilot SRE proof demo](docs/screenshots/copilot-sre-demo.gif)
@@ -100,6 +104,21 @@ Copilot SRE connects all four into one workflow.
 
 See [EVALUATION.md](docs/EVALUATION.md) for suggested product-proof metrics such as time to first root-cause hypothesis, time to mitigation recommendation, incident brief completeness, rollback guidance quality, and reduction in context switching.
 
+## Measured impact / evaluation plan
+
+This project should ultimately be judged by whether it improves real incident handling, not just whether it looks good in a demo.
+
+The key metrics to evaluate are:
+
+- time to first plausible root-cause hypothesis
+- time to mitigation recommendation
+- time to rollback decision
+- reduction in context switching
+- completeness of the generated incident brief
+- quality of rollback guidance
+
+The full evaluation framework is in [EVALUATION.md](docs/EVALUATION.md).
+
 ## Launch the UI demo
 
 Run this from the project root:
@@ -181,13 +200,44 @@ scripts/
   capture_ui_screenshots.ps1
 ```
 
-## Next steps
+## Why this could be a GitHub product direction
 
-- add Azure Monitor and App Insights connectors
-- add GitHub issue and PR correlation
-- add runbook matching via embeddings
-- support live MCP-backed evidence gathering
-- generate rollback plans and postmortems from real telemetry
+Copilot SRE suggests a broader product idea:
+
+GitHub Copilot CLI becomes more valuable when it is paired with a context assembly layer that understands engineering workflows, not just prompts.
+
+That matters because modern operational work spans:
+
+- code and PR history
+- deployment activity
+- telemetry and incidents
+- runbooks and internal guidance
+
+Copilot SRE shows one possible direction where GitHub tooling could evolve from repository-centric assistance into operational workflow intelligence built around Copilot.
+
+## Roadmap
+
+### Near-term
+
+- add Azure Monitor alert ingestion
+- deepen GitHub deploy / issue / PR correlation
+- generate stronger rollback and post-incident follow-up outputs
+- improve evaluation with measured baseline comparisons
+
+### v0.2.0
+
+- add MCP-backed live evidence gathering
+- auto-generate incident packs from live sources
+- pull runbooks and operational context through MCP
+- reduce setup friction for moving from demo mode to real incidents
+
+See [MCP_PLAN.md](docs/MCP_PLAN.md) for the next-version MCP integration plan.
+
+### Longer-term
+
+- repeated-incident memory and pattern matching
+- richer release-health workflows
+- team-shared incident context and follow-up summaries
 
 ## Live GitHub enrichment
 

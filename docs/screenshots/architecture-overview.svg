@@ -1,0 +1,98 @@
+<svg width="1400" height="720" viewBox="0 0 1400 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1400" y2="720" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#07111F"/>
+      <stop offset="1" stop-color="#0A1E34"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="280" y2="140" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0D2037"/>
+      <stop offset="1" stop-color="#0A182B"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="200" y2="0" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#67F0C1"/>
+      <stop offset="1" stop-color="#74B9FF"/>
+    </linearGradient>
+    <filter id="shadow" x="-40" y="-40" width="320" height="180" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#000000" flood-opacity="0.35"/>
+    </filter>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0 0L12 6L0 12V0Z" fill="#6FCFE3"/>
+    </marker>
+  </defs>
+
+  <rect width="1400" height="720" rx="28" fill="url(#bg)"/>
+
+  <text x="72" y="90" fill="#ECF5FF" font-family="Segoe UI, Arial, sans-serif" font-size="54" font-weight="700">Copilot SRE Architecture</text>
+  <text x="72" y="128" fill="#8AA5C7" font-family="Segoe UI, Arial, sans-serif" font-size="24">Context assembly first, Copilot CLI reasoning second</text>
+
+  <g filter="url(#shadow)">
+    <rect x="72" y="190" width="250" height="140" rx="24" fill="url(#panel)" stroke="#244664"/>
+    <text x="100" y="235" fill="#67F0C1" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="600">INPUTS</text>
+    <text x="100" y="275" fill="#ECF5FF" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="700">Alert / Incident</text>
+    <text x="100" y="308" fill="#8AA5C7" font-family="Segoe UI, Arial, sans-serif" font-size="21">Signal that something is wrong</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="388" y="110" width="250" height="140" rx="24" fill="url(#panel)" stroke="#244664"/>
+    <text x="416" y="155" fill="#67F0C1" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="600">ENRICHMENT</text>
+    <text x="416" y="195" fill="#ECF5FF" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="700">Telemetry</text>
+    <text x="416" y="228" fill="#8AA5C7" font-family="Segoe UI, Arial, sans-serif" font-size="21">logs, metrics, deploy signals</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="388" y="290" width="250" height="140" rx="24" fill="url(#panel)" stroke="#244664"/>
+    <text x="416" y="335" fill="#67F0C1" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="600">ENRICHMENT</text>
+    <text x="416" y="375" fill="#ECF5FF" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="700">GitHub</text>
+    <text x="416" y="408" fill="#8AA5C7" font-family="Segoe UI, Arial, sans-serif" font-size="21">commits, PRs, deploy history</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="388" y="470" width="250" height="140" rx="24" fill="url(#panel)" stroke="#244664"/>
+    <text x="416" y="515" fill="#67F0C1" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="600">ENRICHMENT</text>
+    <text x="416" y="555" fill="#ECF5FF" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="700">Runbooks</text>
+    <text x="416" y="588" fill="#8AA5C7" font-family="Segoe UI, Arial, sans-serif" font-size="21">operational guidance and playbooks</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="712" y="220" width="300" height="180" rx="24" fill="url(#panel)" stroke="#2C587C"/>
+    <rect x="742" y="252" width="120" height="8" rx="4" fill="url(#accent)"/>
+    <text x="742" y="300" fill="#ECF5FF" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="700">Correlation Engine</text>
+    <text x="742" y="338" fill="#8AA5C7" font-family="Segoe UI, Arial, sans-serif" font-size="22">suspect ranking</text>
+    <text x="742" y="370" fill="#8AA5C7" font-family="Segoe UI, Arial, sans-serif" font-size="22">timeline assembly</text>
+    <text x="742" y="402" fill="#8AA5C7" font-family="Segoe UI, Arial, sans-serif" font-size="22">incident brief generation</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="1088" y="130" width="240" height="120" rx="24" fill="url(#panel)" stroke="#244664"/>
+    <text x="1116" y="174" fill="#67F0C1" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="600">OUTPUT</text>
+    <text x="1116" y="214" fill="#ECF5FF" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="700">Mitigation</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="1088" y="290" width="240" height="120" rx="24" fill="url(#panel)" stroke="#244664"/>
+    <text x="1116" y="334" fill="#67F0C1" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="600">OUTPUT</text>
+    <text x="1116" y="374" fill="#ECF5FF" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="700">Rollback</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="1088" y="450" width="240" height="160" rx="24" fill="url(#panel)" stroke="#2C587C"/>
+    <text x="1116" y="494" fill="#67F0C1" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="600">COPILOT LAYER</text>
+    <text x="1116" y="534" fill="#ECF5FF" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="700">Copilot CLI</text>
+    <text x="1116" y="568" fill="#8AA5C7" font-family="Segoe UI, Arial, sans-serif" font-size="21">structured prompt handoff</text>
+    <text x="1116" y="598" fill="#8AA5C7" font-family="Segoe UI, Arial, sans-serif" font-size="21">root-cause reasoning</text>
+  </g>
+
+  <path d="M322 260H364C376 260 388 248 388 236V180" stroke="#6FCFE3" stroke-width="4" marker-end="url(#arrow)"/>
+  <path d="M322 260H360C374 260 388 276 388 290" stroke="#6FCFE3" stroke-width="4" marker-end="url(#arrow)"/>
+  <path d="M322 260H360C374 260 388 430 388 470" stroke="#6FCFE3" stroke-width="4" marker-end="url(#arrow)"/>
+
+  <path d="M638 180H690C702 180 712 200 712 230" stroke="#6FCFE3" stroke-width="4" marker-end="url(#arrow)"/>
+  <path d="M638 360H684C698 360 712 340 712 325" stroke="#6FCFE3" stroke-width="4" marker-end="url(#arrow)"/>
+  <path d="M638 540H690C702 540 712 450 712 390" stroke="#6FCFE3" stroke-width="4" marker-end="url(#arrow)"/>
+
+  <path d="M1012 280H1058C1072 280 1088 235 1088 190" stroke="#6FCFE3" stroke-width="4" marker-end="url(#arrow)"/>
+  <path d="M1012 310H1060C1074 310 1088 330 1088 350" stroke="#6FCFE3" stroke-width="4" marker-end="url(#arrow)"/>
+  <path d="M1012 340H1058C1072 340 1088 470 1088 490" stroke="#6FCFE3" stroke-width="4" marker-end="url(#arrow)"/>
+
+  <text x="72" y="670" fill="#8AA5C7" font-family="Segoe UI, Arial, sans-serif" font-size="20">Copilot SRE assembles operational context before reasoning, which is why it feels different from a plain chat tool or dashboard.</text>
+</svg>
