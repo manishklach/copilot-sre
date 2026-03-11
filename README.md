@@ -73,6 +73,29 @@ Copilot CLI is powerful, but incident response often starts with fragmented cont
 
 Copilot SRE compresses that into one command so Copilot starts with evidence, not guesswork.
 
+## Why this is different
+
+Copilot SRE is not:
+
+- just another dashboard
+- just a chatbot for logs
+- just a postmortem generator
+
+It is a context assembly and operational reasoning layer for incidents.
+
+That means it does something different from typical tools:
+
+- observability tools show telemetry
+- GitHub shows code and release activity
+- runbooks show human guidance
+- Copilot CLI provides reasoning
+
+Copilot SRE connects all four into one workflow.
+
+## Evaluation
+
+See [EVALUATION.md](docs/EVALUATION.md) for suggested product-proof metrics such as time to first root-cause hypothesis, time to mitigation recommendation, incident brief completeness, rollback guidance quality, and reduction in context switching.
+
 ## Launch the UI demo
 
 Run this from the project root:

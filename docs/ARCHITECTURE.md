@@ -15,6 +15,49 @@ Instead of asking Copilot a vague question like "why is prod broken?", the syste
 
 It then turns that evidence into a structured investigation brief and an SRE-grade Copilot prompt.
 
+## Architecture diagram
+
+```mermaid
+flowchart LR
+    A["Alert / Incident Input"] --> B["Incident Pack"]
+    B --> C["Telemetry Enrichment"]
+    B --> D["GitHub Enrichment"]
+    B --> E["Runbook Context"]
+
+    C --> C1["Logs"]
+    C --> C2["Metrics"]
+    C --> C3["Deploy Signals"]
+    D --> D1["Commits"]
+    D --> D2["Pull Requests"]
+    E --> E1["Operational Guidance"]
+
+    C1 --> F["Correlation and Suspect Ranking"]
+    C2 --> F
+    C3 --> F
+    D1 --> F
+    D2 --> F
+    E1 --> F
+
+    F --> G["Incident Brief Generation"]
+    G --> H["Mitigation Options"]
+    G --> I["Rollback Recommendation"]
+    G --> J["Copilot CLI Handoff Prompt"]
+
+    J --> K["GitHub Copilot CLI"]
+    K --> L["Root Cause Reasoning"]
+    K --> M["Operator Guidance"]
+
+    H --> N["UI / CLI Output"]
+    I --> N
+    L --> N
+    M --> N
+    N --> O["Postmortem / Release Follow-up"]
+```
+
+This is the core product idea in one sentence:
+
+Copilot SRE assembles operational context first, then uses Copilot CLI as the reasoning engine on top of that context.
+
 ## Core loop
 
 1. Collect incident evidence
