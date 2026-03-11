@@ -6,6 +6,16 @@ It is an incident-response cockpit built on top of Copilot CLI that correlates t
 
 Instead of starting from a vague prompt during an outage, Copilot SRE assembles the evidence first and then hands Copilot a structured operational brief.
 
+## Dashboard screenshots
+
+### UI overview
+
+![Copilot SRE UI overview](docs/screenshots/ui-overview.png)
+
+### App Insights dashboard view
+
+![Copilot SRE dashboard view](docs/screenshots/ui-dashboard.png)
+
 ## What it does
 
 Copilot SRE collects incident context from deploy metadata, logs, metrics, alerts, runbooks, and repository activity, then turns that context into a structured SRE workflow:
@@ -140,6 +150,8 @@ samples/
   incident-001/
 tests/
   test_analysis.py
+scripts/
+  capture_ui_screenshots.ps1
 ```
 
 ## Next steps
@@ -187,6 +199,14 @@ This pulls:
 - a KPI dashboard narrative when demo mode is used
 
 The enriched telemetry is merged back into `incident.json`, which means triage, mitigation, rollback, and prompt generation all benefit automatically.
+
+## Refreshing screenshots
+
+To recapture the README screenshots from the live UI demo:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\capture_ui_screenshots.ps1
+```
 
 ## License
 
