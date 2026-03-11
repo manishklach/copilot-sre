@@ -53,7 +53,7 @@ The flow looks like this:
 
 The incident handoff prompt is built in:
 
-- [prompt_builder.py](/Users/ManishKL/Documents/Playground/copilot-sre/copilot_sre/prompt_builder.py)
+- [prompt_builder.py](../copilot_sre/prompt_builder.py)
 
 That file combines:
 
@@ -73,7 +73,7 @@ into one Copilot-ready brief.
 
 The actual Copilot CLI handoff happens in:
 
-- [copilot_runner.py](/Users/ManishKL/Documents/Playground/copilot-sre/copilot_sre/copilot_runner.py)
+- [copilot_runner.py](../copilot_sre/copilot_runner.py)
 
 That module shells out to:
 

@@ -45,11 +45,11 @@ If you publish this repository, a good short attribution line is:
 
 ## How it uses Copilot CLI
 
-See [HOW_IT_WORKS_WITH_COPILOT_CLI.md](/Users/ManishKL/Documents/Playground/copilot-sre/docs/HOW_IT_WORKS_WITH_COPILOT_CLI.md) for a dedicated explanation of how Copilot SRE prepares incident context and then hands the final investigation brief to GitHub Copilot CLI underneath.
+See [HOW_IT_WORKS_WITH_COPILOT_CLI.md](docs/HOW_IT_WORKS_WITH_COPILOT_CLI.md) for a dedicated explanation of how Copilot SRE prepares incident context and then hands the final investigation brief to GitHub Copilot CLI underneath.
 
 ## Why Copilot SRE
 
-See [WHY_COPILOT_SRE.md](/Users/ManishKL/Documents/Playground/copilot-sre/docs/WHY_COPILOT_SRE.md) for the product rationale: why it exists, how it differs from existing tools, how it helps developers and releases, and how it can integrate into CI/CD workflows.
+See [WHY_COPILOT_SRE.md](docs/WHY_COPILOT_SRE.md) for the product rationale: why it exists, how it differs from existing tools, how it helps developers and releases, and how it can integrate into CI/CD workflows.
 
 ## Why this matters
 
@@ -190,4 +190,4 @@ The enriched telemetry is merged back into `incident.json`, which means triage, 
 
 ## License
 
-This project is licensed under the MIT License. See [LICENSE](/Users/ManishKL/Documents/Playground/copilot-sre/LICENSE).
+This project is licensed under the MIT License. See [LICENSE](LICENSE).
