@@ -117,6 +117,18 @@ The key metrics to evaluate are:
 - completeness of the generated incident brief
 - quality of rollback guidance
 
+Example success metrics for a real evaluation run:
+
+| Metric | Baseline | Copilot SRE target |
+|---|---:|---:|
+| Time to first plausible hypothesis | 11 min | 4 min |
+| Time to mitigation recommendation | 16 min | 6 min |
+| Time to rollback decision | 21 min | 8 min |
+| Distinct tools used | 5 | 2 |
+| Incident brief completeness | 63% | 92% |
+
+These are target/example numbers for the evaluation framework, not claimed production results.
+
 The full evaluation framework is in [EVALUATION.md](docs/EVALUATION.md).
 
 ## Launch the UI demo
@@ -200,45 +212,6 @@ scripts/
   capture_ui_screenshots.ps1
 ```
 
-## Why this could be a GitHub product direction
-
-Copilot SRE suggests a broader product idea:
-
-GitHub Copilot CLI becomes more valuable when it is paired with a context assembly layer that understands engineering workflows, not just prompts.
-
-That matters because modern operational work spans:
-
-- code and PR history
-- deployment activity
-- telemetry and incidents
-- runbooks and internal guidance
-
-Copilot SRE shows one possible direction where GitHub tooling could evolve from repository-centric assistance into operational workflow intelligence built around Copilot.
-
-## Roadmap
-
-### Near-term
-
-- add Azure Monitor alert ingestion
-- deepen GitHub deploy / issue / PR correlation
-- generate stronger rollback and post-incident follow-up outputs
-- improve evaluation with measured baseline comparisons
-
-### v0.2.0
-
-- add MCP-backed live evidence gathering
-- auto-generate incident packs from live sources
-- pull runbooks and operational context through MCP
-- reduce setup friction for moving from demo mode to real incidents
-
-See [MCP_PLAN.md](docs/MCP_PLAN.md) for the next-version MCP integration plan.
-
-### Longer-term
-
-- repeated-incident memory and pattern matching
-- richer release-health workflows
-- team-shared incident context and follow-up summaries
-
 ## Live GitHub enrichment
 
 Copilot SRE can enrich an incident with recent repository activity:
@@ -276,6 +249,46 @@ This pulls:
 - a KPI dashboard narrative when demo mode is used
 
 The enriched telemetry is merged back into `incident.json`, which means triage, mitigation, rollback, and prompt generation all benefit automatically.
+
+## Why this could be a GitHub product direction
+
+Copilot SRE suggests a broader product idea:
+
+GitHub Copilot CLI becomes more valuable when it is paired with a context assembly layer that understands engineering workflows, not just prompts.
+
+That matters because modern operational work spans:
+
+- code and PR history
+- deployment activity
+- telemetry and incidents
+- runbooks and internal guidance
+
+Copilot SRE shows one possible direction where GitHub tooling could evolve from repository-centric assistance into operational workflow intelligence built around Copilot.
+
+## Roadmap
+
+### Near-term
+
+- add Azure Monitor alert ingestion
+- deepen GitHub deploy / issue / PR correlation
+- generate stronger rollback and post-incident follow-up outputs
+- run baseline vs Copilot SRE evaluations on realistic incidents
+
+### v0.2.0
+
+- add MCP-backed live evidence gathering
+- auto-generate incident packs from live sources
+- pull runbooks and operational context through MCP
+- reduce setup friction for moving from demo mode to real incidents
+
+See [MCP_PLAN.md](docs/MCP_PLAN.md) for the next-version MCP integration plan.
+
+### Longer-term
+
+- repeated-incident memory and pattern matching
+- richer release-health workflows
+- team-shared incident context and follow-up summaries
+- release-health and CI/CD incident intelligence
 
 ## Refreshing screenshots
 
