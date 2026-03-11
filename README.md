@@ -8,7 +8,42 @@ Instead of starting from a vague prompt during an outage, Copilot SRE assembles 
 
 ## Architecture overview
 
-![Copilot SRE architecture overview](docs/screenshots/architecture-overview.svg)
+```mermaid
+flowchart LR
+    A["Alert / Incident Input"] --> B["Incident Pack"]
+    B --> C["Telemetry Enrichment"]
+    B --> D["GitHub Enrichment"]
+    B --> E["Runbook Context"]
+
+    C --> C1["Logs"]
+    C --> C2["Metrics"]
+    C --> C3["Deploy Signals"]
+    D --> D1["Commits"]
+    D --> D2["Pull Requests"]
+    E --> E1["Operational Guidance"]
+
+    C1 --> F["Correlation and Suspect Ranking"]
+    C2 --> F
+    C3 --> F
+    D1 --> F
+    D2 --> F
+    E1 --> F
+
+    F --> G["Incident Brief Generation"]
+    G --> H["Mitigation Options"]
+    G --> I["Rollback Recommendation"]
+    G --> J["Copilot CLI Handoff Prompt"]
+
+    J --> K["GitHub Copilot CLI"]
+    K --> L["Root Cause Reasoning"]
+    K --> M["Operator Guidance"]
+
+    H --> N["UI / CLI Output"]
+    I --> N
+    L --> N
+    M --> N
+    N --> O["Postmortem / Release Follow-up"]
+```
 
 ## Proof demo
 
