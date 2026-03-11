@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Copilot SRE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <div class="aurora aurora-a"></div>
+    <div class="aurora aurora-b"></div>
+    <main class="shell">
+      <section class="hero card">
+        <div>
+          <p class="eyebrow">Terminal-native incident command</p>
+          <h1>Copilot SRE</h1>
+          <p class="hero-copy">
+            A cinematic incident cockpit that correlates telemetry, GitHub activity, runbooks, mitigation plans,
+            rollback guidance, and a Copilot-ready investigation brief.
+          </p>
+          <div class="demo-controls">
+            <button id="demoPlayBtn" class="demo-button">Play Guided Demo</button>
+            <button id="demoReplayBtn" class="demo-button ghost">Replay</button>
+          </div>
+        </div>
+        <div class="hero-stats">
+          <div class="stat">
+            <span class="label">Severity</span>
+            <strong id="severityBadge">...</strong>
+          </div>
+          <div class="stat">
+            <span class="label">Top suspect</span>
+            <strong id="topSuspect">...</strong>
+          </div>
+          <div class="stat">
+            <span class="label">Incident start</span>
+            <strong id="incidentStart">...</strong>
+          </div>
+        </div>
+      </section>
+
+      <section class="card demo-stage" id="demoStage">
+        <div class="panel-header">
+          <h2>Replayable Demo</h2>
+          <span id="demoStepLabel">Ready to narrate the workflow</span>
+        </div>
+        <div class="demo-stage-body">
+          <div class="demo-script">
+            <div class="demo-script-line" id="demoTitle">Press Play Guided Demo</div>
+            <p id="demoBody">
+              The guided demo will automatically walk through incident triage, GitHub correlation, mitigation,
+              rollback, and the Copilot handoff story.
+            </p>
+          </div>
+          <div class="demo-progress">
+            <div class="demo-track"><div id="demoProgressBar"></div></div>
+            <div class="demo-meta">
+              <span id="demoProgressText">0 / 0</span>
+              <span id="demoModeText">Manual mode</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="control-row demo-target" data-demo-id="controls">
+        <div class="card controls">
+          <div class="panel-header">
+            <h2>Live Enrichment</h2>
+            <span>Bring in real ecosystem context</span>
+          </div>
+          <div class="form-grid">
+            <div class="form-card">
+              <h3>GitHub</h3>
+              <label>Repository</label>
+              <input id="githubRepo" value="github/copilot-cli-for-beginners">
+              <label>Lookback hours</label>
+              <input id="githubLookback" type="number" value="24">
+              <button id="githubBtn" class="accent">Enrich from GitHub</button>
+            </div>
+            <div class="form-card">
+              <h3>Application Insights</h3>
+              <label>App ID</label>
+              <input id="azureAppId" value="cf58dcfd-0683-487c-bc84-048789bca8e5" placeholder="Paste your App Insights app id">
+              <label>Lookback minutes</label>
+              <input id="azureLookback" type="number" value="30">
+              <button id="azureBtn">Load Demo Azure Insights</button>
+            </div>
+            <div class="form-card action-card">
+              <h3>Copilot Handoff</h3>
+              <p>Send the structured investigation brief to Copilot CLI directly.</p>
+              <button id="copilotBtn">Run Copilot</button>
+            </div>
+          </div>
+          <div id="statusBar" class="status">Ready.</div>
+        </div>
+      </section>
+
+      <section class="grid two-up">
+        <article class="card">
+          <div class="panel-header">
+            <h2>Incident Brief</h2>
+            <span id="incidentTitle">Loading</span>
+          </div>
+          <div class="brief">
+            <p id="incidentSummary"></p>
+            <ul id="symptoms" class="chip-list"></ul>
+          </div>
+        </article>
+        <article class="card demo-target" data-demo-id="actions">
+          <div class="panel-header">
+            <h2>Recommended Actions</h2>
+            <span>Operator-grade guidance</span>
+          </div>
+          <ul id="actions" class="stack-list"></ul>
+        </article>
+      </section>
+
+      <section class="grid main-grid">
+        <article class="card demo-target" data-demo-id="suspects">
+          <div class="panel-header">
+            <h2>Likely Root Causes</h2>
+            <span>Ranked suspects</span>
+          </div>
+          <div id="suspects" class="suspect-stack"></div>
+        </article>
+        <article class="card demo-target" data-demo-id="mitigation">
+          <div class="panel-header">
+            <h2>Mitigation Matrix</h2>
+            <span>Immediate options</span>
+          </div>
+          <div id="mitigation" class="mitigation-stack"></div>
+        </article>
+        <article class="card demo-target" data-demo-id="rollback">
+          <div class="panel-header">
+            <h2>Rollback Decision</h2>
+            <span>Risk-aware recommendation</span>
+          </div>
+          <div id="rollback"></div>
+        </article>
+      </section>
+
+      <section class="grid two-up">
+        <article class="card demo-target" data-demo-id="dashboards">
+          <div class="panel-header">
+            <h2>Insights Dashboard</h2>
+            <span id="dashboardMeta">Interactive telemetry story</span>
+          </div>
+          <div id="dashboardSummary" class="dashboard-summary">Load the demo App Insights dataset to populate the telemetry dashboard.</div>
+          <div id="kpiCards" class="kpi-grid"></div>
+          <div class="chart-grid">
+            <div class="chart-panel">
+              <h3>Latency Trend</h3>
+              <svg id="latencyChart" viewBox="0 0 420 180" class="metric-chart"></svg>
+            </div>
+            <div class="chart-panel">
+              <h3>Failure Rate Trend</h3>
+              <svg id="errorChart" viewBox="0 0 420 180" class="metric-chart"></svg>
+            </div>
+            <div class="chart-panel">
+              <h3>Conversion Trend</h3>
+              <svg id="conversionChart" viewBox="0 0 420 180" class="metric-chart"></svg>
+            </div>
+          </div>
+          <ul id="dashboardNarrative" class="stack-list compact"></ul>
+        </article>
+        <article class="card demo-target" data-demo-id="telemetry">
+          <div class="panel-header">
+            <h2>Telemetry Explorer</h2>
+            <span>Metrics and operational signals</span>
+          </div>
+          <div id="metricExplorer" class="metric-explorer"></div>
+        </article>
+      </section>
+
+      <section class="grid two-up">
+        <article class="card demo-target" data-demo-id="timeline">
+          <div class="panel-header">
+            <h2>Operational Timeline</h2>
+            <span>Deploys, alerts, and logs</span>
+          </div>
+          <div id="timeline" class="timeline"></div>
+        </article>
+        <article class="card demo-target" data-demo-id="context">
+          <div class="panel-header">
+            <h2>Repo & Runbook Context</h2>
+            <span>GitHub plus local guidance</span>
+          </div>
+          <div class="split-panel">
+            <div>
+              <h3>Recent commits</h3>
+              <ul id="commits" class="stack-list compact"></ul>
+              <h3>Recent pull requests</h3>
+              <ul id="pullRequests" class="stack-list compact"></ul>
+            </div>
+            <div>
+              <h3>Runbooks</h3>
+              <ul id="runbooks" class="stack-list compact"></ul>
+              <h3>Alerts</h3>
+              <ul id="alerts" class="stack-list compact"></ul>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="grid two-up">
+        <article class="card prompt-card demo-target" data-demo-id="prompt">
+          <div class="panel-header">
+            <h2>Copilot Prompt</h2>
+            <span>Structured handoff</span>
+          </div>
+          <pre id="promptBox"></pre>
+        </article>
+        <article class="card prompt-card demo-target" data-demo-id="copilot">
+          <div class="panel-header">
+            <h2>Copilot Output</h2>
+            <span>Live execution</span>
+          </div>
+          <pre id="copilotOutput">Run Copilot to see the result here.</pre>
+        </article>
+      </section>
+    </main>
+    <script src="/app.js"></script>
+  </body>
+</html>

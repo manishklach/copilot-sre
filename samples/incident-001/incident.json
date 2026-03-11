@@ -1,0 +1,362 @@
+{
+  "incident_id": "INC-2026-0311",
+  "title": "Checkout API latency spike after payments deploy",
+  "service": "checkout-api",
+  "started_at": "2026-03-11T10:07:00Z",
+  "customer_impact": "Elevated checkout failures and slow payment confirmation for approximately 38% of users",
+  "symptoms": [
+    "P95 checkout latency increased from 420ms to 3900ms",
+    "HTTP 502 rate increased from 0.2% to 11.8%",
+    "Payment authorization requests timing out from checkout-api to payments-api",
+    "Conversion on the checkout funnel dropped sharply within minutes of deploy"
+  ],
+  "alerts": [
+    {
+      "name": "checkout-latency-p95",
+      "severity": "SEV1",
+      "fired_at": "2026-03-11T10:08:00Z",
+      "summary": "P95 latency exceeded 3000ms for 5 minutes"
+    },
+    {
+      "name": "checkout-5xx-rate",
+      "severity": "SEV1",
+      "fired_at": "2026-03-11T10:09:00Z",
+      "summary": "5xx error rate exceeded 10%"
+    },
+    {
+      "name": "checkout-conversion-drop",
+      "severity": "SEV2",
+      "fired_at": "2026-03-11T10:11:00Z",
+      "summary": "Completed checkout conversion fell by 31% versus baseline"
+    }
+  ],
+  "metrics": [
+    {
+      "timestamp": "2026-03-11T09:50:00Z",
+      "name": "appinsights.request_p95",
+      "value": 430,
+      "baseline": 420,
+      "unit": "ms"
+    },
+    {
+      "timestamp": "2026-03-11T09:55:00Z",
+      "name": "appinsights.request_p95",
+      "value": 510,
+      "baseline": 420,
+      "unit": "ms"
+    },
+    {
+      "timestamp": "2026-03-11T10:00:00Z",
+      "name": "appinsights.request_p95",
+      "value": 770,
+      "baseline": 420,
+      "unit": "ms"
+    },
+    {
+      "timestamp": "2026-03-11T10:05:00Z",
+      "name": "appinsights.request_p95",
+      "value": 1280,
+      "baseline": 420,
+      "unit": "ms"
+    },
+    {
+      "timestamp": "2026-03-11T10:10:00Z",
+      "name": "appinsights.request_p95",
+      "value": 3920,
+      "baseline": 420,
+      "unit": "ms"
+    },
+    {
+      "timestamp": "2026-03-11T10:15:00Z",
+      "name": "appinsights.request_p95",
+      "value": 3670,
+      "baseline": 420,
+      "unit": "ms"
+    },
+    {
+      "timestamp": "2026-03-11T09:50:00Z",
+      "name": "appinsights.failed_request_rate",
+      "value": 0.3,
+      "baseline": 0.2,
+      "unit": "%"
+    },
+    {
+      "timestamp": "2026-03-11T09:55:00Z",
+      "name": "appinsights.failed_request_rate",
+      "value": 0.4,
+      "baseline": 0.2,
+      "unit": "%"
+    },
+    {
+      "timestamp": "2026-03-11T10:00:00Z",
+      "name": "appinsights.failed_request_rate",
+      "value": 1.2,
+      "baseline": 0.2,
+      "unit": "%"
+    },
+    {
+      "timestamp": "2026-03-11T10:05:00Z",
+      "name": "appinsights.failed_request_rate",
+      "value": 3.7,
+      "baseline": 0.2,
+      "unit": "%"
+    },
+    {
+      "timestamp": "2026-03-11T10:10:00Z",
+      "name": "appinsights.failed_request_rate",
+      "value": 12.8,
+      "baseline": 0.2,
+      "unit": "%"
+    },
+    {
+      "timestamp": "2026-03-11T10:15:00Z",
+      "name": "appinsights.failed_request_rate",
+      "value": 10.4,
+      "baseline": 0.2,
+      "unit": "%"
+    },
+    {
+      "timestamp": "2026-03-11T09:50:00Z",
+      "name": "appinsights.checkout_conversion_rate",
+      "value": 72.0,
+      "baseline": 72.0,
+      "unit": "%"
+    },
+    {
+      "timestamp": "2026-03-11T09:55:00Z",
+      "name": "appinsights.checkout_conversion_rate",
+      "value": 71.0,
+      "baseline": 72.0,
+      "unit": "%"
+    },
+    {
+      "timestamp": "2026-03-11T10:00:00Z",
+      "name": "appinsights.checkout_conversion_rate",
+      "value": 68.0,
+      "baseline": 72.0,
+      "unit": "%"
+    },
+    {
+      "timestamp": "2026-03-11T10:05:00Z",
+      "name": "appinsights.checkout_conversion_rate",
+      "value": 59.0,
+      "baseline": 72.0,
+      "unit": "%"
+    },
+    {
+      "timestamp": "2026-03-11T10:10:00Z",
+      "name": "appinsights.checkout_conversion_rate",
+      "value": 41.0,
+      "baseline": 72.0,
+      "unit": "%"
+    },
+    {
+      "timestamp": "2026-03-11T10:15:00Z",
+      "name": "appinsights.checkout_conversion_rate",
+      "value": 44.0,
+      "baseline": 72.0,
+      "unit": "%"
+    }
+  ],
+  "logs": [
+    {
+      "timestamp": "2026-03-11T10:06:41Z",
+      "level": "ERROR",
+      "service": "checkout-api",
+      "message": "payments upstream request failed: connect ETIMEDOUT https://payments-v2.internal"
+    },
+    {
+      "timestamp": "2026-03-11T10:07:12Z",
+      "level": "ERROR",
+      "service": "checkout-api",
+      "message": "PAYMENTS_API_BASE_URL resolved to payments-v2.internal in production"
+    },
+    {
+      "timestamp": "2026-03-11T10:07:55Z",
+      "level": "CRITICAL",
+      "service": "payments-api",
+      "message": "startup configuration mismatch: expected payments.internal, got payments-v2.internal"
+    },
+    {
+      "timestamp": "2026-03-11T10:09:41Z",
+      "level": "ERROR",
+      "service": "checkout-api",
+      "message": "circuit breaker opened for dependency payments-api after consecutive upstream timeouts"
+    },
+    {
+      "timestamp": "2026-03-11T10:10:24Z",
+      "level": "WARN",
+      "service": "checkout-api",
+      "message": "checkout fallback path engaged, payment authorization disabled for affected requests"
+    },
+    {
+      "timestamp": "2026-03-11T10:04:51Z",
+      "level": "WARN",
+      "service": "checkout-api",
+      "message": "new payment endpoint rollout reached 100% of production traffic"
+    },
+    {
+      "timestamp": "2026-03-11T10:06:18Z",
+      "level": "ERROR",
+      "service": "checkout-api",
+      "message": "dependency call to payments-v2.internal exceeded 5s timeout budget"
+    },
+    {
+      "timestamp": "2026-03-11T10:07:02Z",
+      "level": "ERROR",
+      "service": "checkout-api",
+      "message": "dependency failure cluster detected in westus checkout ring"
+    },
+    {
+      "timestamp": "2026-03-11T10:08:19Z",
+      "level": "CRITICAL",
+      "service": "payments-api",
+      "message": "payment endpoint configuration mismatch between checkout-api and payments-api"
+    },
+    {
+      "timestamp": "2026-03-11T10:09:54Z",
+      "level": "ERROR",
+      "service": "checkout-api",
+      "message": "retry storm detected for payment authorization workflow"
+    }
+  ],
+  "deploys": [
+    {
+      "timestamp": "2026-03-11T09:52:00Z",
+      "service": "payments-api",
+      "version": "payments-api@2026.03.11.2",
+      "actor": "release-bot",
+      "summary": "Deploy payment edge routing updates with staged production rollout"
+    },
+    {
+      "timestamp": "2026-03-11T10:05:00Z",
+      "service": "checkout-api",
+      "version": "checkout-api@2026.03.11.4",
+      "actor": "ci-bot",
+      "summary": "Promote checkout release with new payments client and environment variable rename"
+    }
+  ],
+  "commits": [
+    {
+      "sha": "30432a0",
+      "author": "Dan Wahlin",
+      "message": "Merge pull request #15 from github/docs/expand-resume-session-guidance"
+    },
+    {
+      "sha": "2fe8568",
+      "author": "Dan Wahlin",
+      "message": "docs: expand --resume session guidance in Chapter 02"
+    },
+    {
+      "sha": "f201a68",
+      "author": "Dan Wahlin",
+      "message": "Merge pull request #14 from github/docs/microsoft-learn-mcp-server"
+    },
+    {
+      "sha": "1c3b75f",
+      "author": "Dan Wahlin",
+      "message": "Update link"
+    },
+    {
+      "sha": "8f96b3b",
+      "author": "Dan Wahlin",
+      "message": "Copilot dev days image"
+    }
+  ],
+  "runbooks": [
+    {
+      "title": "Checkout 5xx triage",
+      "path": "runbooks/checkout-5xx.md",
+      "summary": "Validate deploy correlation, compare env vars, and test payments connectivity"
+    },
+    {
+      "title": "Rollback policy",
+      "path": "runbooks/rollback.md",
+      "summary": "Rollback when mitigation takes longer than 15 minutes and customer impact remains elevated"
+    },
+    {
+      "title": "Payments dependency outage",
+      "path": "runbooks/payments-dependency.md",
+      "summary": "Check circuit breakers, dependency endpoints, and staged rollback options between checkout and payments services"
+    }
+  ],
+  "source_repo": "github/copilot-cli-for-beginners",
+  "pull_requests": [
+    {
+      "number": 15,
+      "title": "docs: expand --resume session guidance in Chapter 02",
+      "author": "DanWahlin",
+      "state": "merged",
+      "updated_at": "2026-03-10T19:46:00Z",
+      "url": "https://github.com/github/copilot-cli-for-beginners/pull/15"
+    },
+    {
+      "number": 14,
+      "title": "Docs/microsoft learn mcp server",
+      "author": "DanWahlin",
+      "state": "merged",
+      "updated_at": "2026-03-10T19:06:04Z",
+      "url": "https://github.com/github/copilot-cli-for-beginners/pull/14"
+    },
+    {
+      "number": 12,
+      "title": "Add static course website with GitHub Pages deployment",
+      "author": "jamesmontemagno",
+      "state": "closed",
+      "updated_at": "2026-03-09T22:38:48Z",
+      "url": "https://github.com/github/copilot-cli-for-beginners/pull/12"
+    },
+    {
+      "number": 11,
+      "title": "docs(mcp): add Microsoft Learn MCP server and fix config paths",
+      "author": "DanWahlin",
+      "state": "merged",
+      "updated_at": "2026-03-09T18:35:13Z",
+      "url": "https://github.com/github/copilot-cli-for-beginners/pull/11"
+    },
+    {
+      "number": 10,
+      "title": "feat(book-app): add search functionality for title and author",
+      "author": "rcsrelateditems-copilot",
+      "state": "closed",
+      "updated_at": "2026-03-09T15:34:46Z",
+      "url": "https://github.com/github/copilot-cli-for-beginners/pull/10"
+    }
+  ],
+  "source_app_insights_app_id": "cf58dcfd-0683-487c-bc84-048789bca8e5",
+  "app_insights_demo": true,
+  "app_insights_dashboard": {
+    "headline": "Demo App Insights: checkout health collapsed immediately after dependency endpoint rollout",
+    "kpis": [
+      {
+        "label": "P95 latency",
+        "value": "3.92s",
+        "delta": "+833%",
+        "tone": "critical"
+      },
+      {
+        "label": "Failed requests",
+        "value": "12.8%",
+        "delta": "+12.6 pts",
+        "tone": "critical"
+      },
+      {
+        "label": "Checkout conversion",
+        "value": "41%",
+        "delta": "-31 pts",
+        "tone": "warning"
+      },
+      {
+        "label": "Dependency errors",
+        "value": "5x",
+        "delta": "spike",
+        "tone": "critical"
+      }
+    ],
+    "narrative": [
+      "Latency begins drifting at 10:00 UTC, then spikes after the 10:05 rollout.",
+      "Request failures climb in lockstep with dependency timeout and retry-storm logs.",
+      "Conversion rate drops sharply, indicating direct business impact instead of an internal-only regression."
+    ]
+  }
+}
